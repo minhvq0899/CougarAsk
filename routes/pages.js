@@ -6,10 +6,33 @@ const router = express.Router();
 // res.render() function is used to render a view
 router.get('/', authController.isLoggedIn, questionController.populateQuestions, (req,res) => {
     if (req.user) {
-        console.log(req.questions)
-        res.render('index', {
+        res.render('landing', {
             user: req.user,
             questions: req.questions
+        }); 
+    } else {
+        res.render('index');
+    }
+});
+
+
+router.get('/tags', authController.isLoggedIn, questionController.populateTags, (req,res) => {
+    if (req.user) {
+        res.render('list_of_tags', {
+            user: req.user,
+            list_of_tags: req.tags_list
+        }); 
+    } else {
+        res.render('index');
+    }
+});
+
+
+router.get('/users', authController.isLoggedIn, authController.populateUsers, (req,res) => {
+    if (req.user) {
+        res.render('list_of_users', {
+            user: req.user,
+            list_of_users: req.users_list
         }); 
     } else {
         res.render('index');
@@ -39,44 +62,19 @@ router.get('/login', (req,res) => {
 });
 
 
-//only go to Booking listings if logged in
-// router.get('/admin_page', authController.isLoggedIn, bookingController.populateBookings, (req,res) => {
-//     if(req.user) {
-//         if (req.user.role == "admin") {
-//             res.render('admin_page', {
-//                 user: req.user,
-//                 reservations: req.reservations
-//             });
-//         } 
-//         else {
-//             res.redirect('/login');
-//         }
-//     }
-//     else {
-//         res.redirect('/login');
-//     }
-// });
-
-// router.get('/each_reservation/:id', authController.isLoggedIn, bookingController.reservationInfo, (req,res) => {
-//     if(req.user && req.user.role == "admin") {
-//         if(req.instance) {
-//             console.log("In Pages: ", req.instance); 
-//             res.render('each_reservation', {
-//                 instance: req.instance
-//             });
-//         } else {
-//             res.redirect('/admin_page');
-//         }
-//     } else {
-//         res.redirect('/login');
-//     }
-// });
+router.get('/each_question/:id', authController.isLoggedIn,  questionController.questionInfo, (req,res) => {
+    if(req.user) {
+        res.render('each_question', {
+            instance: req.instance
+        });
+    } else {
+        res.redirect('/login');
+    }
+});
 
 
 router.get('/settings', authController.isLoggedIn, (req,res) => {
     if (req.user) {
-        console.log(req.user); 
-        console.log( "user.fname: ", req.user.fname); 
         res.render('settings', {
             user: req.user,
             message_fail: req.session.message_fail,

@@ -22,74 +22,98 @@
 
 
 <body>
+    <! –– The purple part ––>
     <nav>
         <h4><a class="text-white text-decoration-none" href="/">Clark Stack Overflow</a></h4>
         <ul>
-            <li><a href="/">Profile Page</a></li>
             <li><a href="/settings">Settings</a></li>
             <li><a href="/auth/logout">Log Out</a></li>
         </ul>
     </nav>
 
-    <div class="container mt-4">
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-dark p-4">
-                <h5 class="text-white h4">Collapsed content</h5>
-                <span class="text-muted">Toggleable via the navbar brand.</span>
-            </div>
-            </div>
-        <nav class="navbar navbar-dark bg-dark">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
-
-        <div class="card" style="width: 25rem; height: 35rem">
-            <div class="card-header">
-                Ask a Question
-            </div>
-            <div class="card-body">
-                <form action="/question/ask" method = "POST">   
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" placeholder="e.g. Difference between Array and LinkedListed" name="title">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="major">Which major is the question about?</label>
-                        <select type="text" class="form-control" id="major" name="major">
-                            <option value=>Select</option>
-                            <option value= "Computer Science"> Computer Science </option>
-                            <option value= "Data Science"> Data Science </option>
-                            <option value= "Economics"> Economics </option>
-                            <option value= "Psychology"> Psychology </option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="body">Body</label>
-                        <input type="text" class="form-control" id="body" name="body">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="tag">Tags</label>
-                        <input type="text" class="form-control" id="tag" placeholder="e.g. array, linkedlist, cs" name="tag">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Post question</button>
-                </form>
+    <div class="row">
+        <! –– Left column ––>
+        <div class="col">
+            <div class="list-group">
+                <a href="/" class="list-group-item list-group-item-action list-group-item-secondary position-relative">
+                    Feed
+                    <span class="badge bg-primary rounded-pill position-absolute end-0">{{questions.length}}</span>
+                </a>
+                <a href="/tags" class="list-group-item list-group-item-action list-group-item-secondary">List of tags</a>
+                <a href="/users" class="list-group-item list-group-item-action list-group-item-secondary">List of users</a>
             </div>
         </div>
 
-        {{#if message_fail }}
-            <h4 class="alert alert-danger mt-4">{{message_fail}}</h4>
-        {{/if}}
-        {{#if message_success}}
-            <h4 class="alert alert-success mt-4">{{message_success}}</h4>
-        {{/if}}
+        <! –– Middle column ––>
+        <div class="col-8 position-relative">
+            <div class="container mt-4">
+                <! –– Collapsed content ––>
+                <div class="collapse" id="navbarToggleExternalContent">
+                    <div class="bg-dark p-4">
+                        <h5 class="text-white h4">Collapsed content</h5>
+                        <span class="text-muted">Toggleable via the navbar brand.</span>
+                    </div>
+                </div>
+                <nav class="navbar navbar-dark bg-dark">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                </nav>
 
+                <! –– Form ––>
+                <div class="card" >
+                    <div class="card-header">
+                        Ask a Question
+                    </div>
+                    <div class="card-body">
+                        <form action="/question/ask" method = "POST">   
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" id="title" placeholder="e.g. Difference between Array and LinkedListed" name="title">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="major">Which major is the question about?</label>
+                                <select type="text" class="form-control" id="major" name="major">
+                                    <option value=>Select</option>
+                                    <option value= "Computer Science"> Computer Science </option>
+                                    <option value= "Data Science"> Data Science </option>
+                                    <option value= "Economics"> Economics </option>
+                                    <option value= "Psychology"> Psychology </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="body">Body</label>
+                                <input type="text" class="form-control" id="body" name="body">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tag">Tags (separated by comma)</label>
+                                <input type="text" class="form-control" id="tag" placeholder="e.g. array, linkedlist, cs" name="tag">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Post question</button>
+                        </form>
+                    </div>
+                </div>
+
+                {{#if message_fail }}
+                    <h4 class="alert alert-danger mt-4">{{message_fail}}</h4>
+                {{/if}}
+                {{#if message_success}}
+                    <h4 class="alert alert-success mt-4">{{message_success}}</h4>
+                {{/if}}
+
+            </div>
+        </div>
+
+        <! –– Right column ––>
+        <div class="col">
+            Column
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

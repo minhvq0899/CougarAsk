@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken'); 
 const bcrypt = require('bcryptjs'); 
 const nodemailer = require("nodemailer");
-const authDebug = require('debug')('app:auth');
+
+
 
 // Create schemas
 const userSchema = new mongoose.Schema({
@@ -10,6 +11,12 @@ const userSchema = new mongoose.Schema({
     last_name: String, 
     grad_year: Number, 
     role: String,
+    major: String,
+    profile_picture: 
+    {
+        data: Buffer, 
+        contentType: String
+    },
     email: String,
     password: String
 });
@@ -18,16 +25,54 @@ userSchema.methods.generateAuthToken = function() {
     const first_name = this.first_name; 
     const last_name = this.last_name; 
     const email = this.email; 
+    const grad_year = this.grad_year;
     const role = this.role;
-    const token = jwt.sign( { id: id, fname: first_name, lname: last_name, email: email, role: role }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN
-    } );
+    const major = this.major;
+    const profile_picture = this.profile_picture;
+    const token = jwt.sign( { id: id, fname: first_name, lname: last_name, grad_year: grad_year, email: email, 
+                            role: role, major: major, profile_picture: profile_picture }, 
+                            process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN} 
+    );
     return token; 
 }; 
 
 // Compile these schema into a model --> a class
 const Users = mongoose.model('Users', userSchema); 
 
+
+
+
+
+
+
+
+// const storage = new GridFsStorage({
+//     url: "mongodb://localhost/cAsk",
+//     options: { useNewUrlParser: true, useUnifiedTopology: true },
+//     file: (req, file) => {
+//         const match = ["image/png", "image/jpeg"];
+
+//         if (match.indexOf(file.mimetype) === -1) {
+//             const filename = `${Date.now()}-any-name-${file.originalname}`;
+//             return filename;
+//         }
+
+//         return {
+//             bucketName: "photos",
+//             filename: `${Date.now()}-any-name-${file.originalname}`,
+//         };
+//     },
+// });
+
+
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads')
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.fieldname + '-' + Date.now())
+//     }
+// });
 
 
 // ************************************************************** Register, Login and Logout **************************************************************
@@ -56,6 +101,8 @@ exports.register_fn = (req, res) => {
             last_name: last_name,
             grad_year: grad_year, 
             role: role,
+            major: null, 
+            profile_picture: null,
             email: email,
             password: hashedPassword
         })
@@ -72,7 +119,7 @@ exports.register_fn = (req, res) => {
     // Check for duplicate email
     async function getEmail() {
         const email_list = await Users.find({ email: email });
-        console.log('Email list', email_list); 
+        // console.log('Email list', email_list); 
 
         if (email_list.length > 0) {
             req.session.message_fail = "Email has already been taken"; 
@@ -102,7 +149,7 @@ exports.login_fn = async (req, res) => {
 
         // query db to check if the provided email and password are correct
         const email_list = await Users.find({ email: email });
-        console.log('Email list', email_list); 
+        // console.log('Email list', email_list); 
         const user = email_list[0]; 
 
         if ( email_list.length == 0 || !(await bcrypt.compare(password, user.password)) ) {
@@ -120,7 +167,7 @@ exports.login_fn = async (req, res) => {
             }
 
             res.cookie('jwt', token, cookieOptions); 
-            console.log("Token: ", token); 
+            // console.log("Token: ", token); 
             if (user.role == "admin") {
                 res.status(200).redirect("/admin_page");     
             } else {
@@ -186,7 +233,26 @@ exports.update_name_fn = async (req, res) => {
         req.session.message_success = "Name Updated"; 
         return res.redirect('/settings');
     } catch (error) {
-        authDebug(error); 
+        console.log(error);
+        req.session.message_fail = "Update fail. Please try again!"; 
+        return res.redirect('/settings');
+    }
+}
+
+
+exports.upload_profile_pic = async (req, res) => {
+    try {     
+        // const result = await Users.updateOne( {email: req.user.email}, {
+        //     $set: {
+        //         "profile_picture": { data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+        //                             contentType: 'image/png'}
+        //     }
+        // }, {upsert: false} )
+        // console.log(result); 
+        req.session.message_success = "Profile Picture Updated"; 
+        return res.redirect('/settings');
+    } catch (error) {
+        console.log(error);
         req.session.message_fail = "Update fail. Please try again!"; 
         return res.redirect('/settings');
     }
@@ -196,6 +262,31 @@ exports.update_name_fn = async (req, res) => {
 
 
 
+
+
+
+// ************************************************************** Populate Users **************************************************************
+exports.populateUsers = async (req, res, next) => {
+    if (req.user){
+        try {
+            const user_list = await Users.find({}, {password:0}); 
+
+            if (!user_list) return next();
+
+            var string = JSON.stringify(user_list);
+            var user_list_final = JSON.parse(string);
+
+            req.users_list = user_list_final; 
+            return next();
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } 
+    else {
+        return next();
+    }
+}
 
 
 
