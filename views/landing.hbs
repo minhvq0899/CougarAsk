@@ -20,8 +20,18 @@
         <h4><a class="text-white text-decoration-none" href="/">CougarAsk</a></h4>
         <! –– Nav bar ––>
         <ul>
-            <li><a href="/settings">{{user.fname}}'s Settings</a></li>
-            <li><a href="/auth/logout">Log Out</a></li>
+            <li><a href="/index">About</a></li>
+            <li><a href="/">Question Feed</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                    <img src="/Images/clark_logo.png" style="width: 25px; height: 25px" class="profile-image img-circle">
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/profile/{{user.id}}/{{user.fname}}{{user.lname}}" class="dropdown-item">{{user.fname}}'s Profile</a></li>
+                    <li><a href="/settings" class="dropdown-item">Settings</a></li>
+                    <li><a href="/auth/logout" class="dropdown-item">Log Out</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 
@@ -30,9 +40,9 @@
         <! –– Left column ––>
         <div class="col">
             <div class="list-group">
-                <a href="/" class="list-group-item list-group-item-action list-group-item-secondary"> Feed</a>
+                <a href="/" class="list-group-item list-group-item-action list-group-item-secondary">Question Feed</a>
                 <a href="/tags" class="list-group-item list-group-item-action list-group-item-secondary">List of tags</a>
-                <a href="/users" class="list-group-item list-group-item-action list-group-item-secondary"> List of users</a>
+                <a href="/users" class="list-group-item list-group-item-action list-group-item-secondary">List of users</a>
             </div>
         </div>
 
@@ -41,7 +51,7 @@
             <div class="row position-relative">
                 <div class="col">
                     <p class="fs-1">All Questions</p>
-                    <p class="text-start">{{questions.length}} questions</p>
+                    <p class="text-start"><strong>Total: {{questions.length}} questions</strong></p>
                 </div>
                 <div class="col  position-relative"> 
                     <a class="btn btn-primary me-md-2 position-absolute top-50 end-0" href="/question" role="button">Ask a question</a>
@@ -62,11 +72,11 @@
                                 <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Sort by 
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Most recent</a></li>
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-                                    <li><a class="dropdown-item" href="#">Most upvoted</a></li>
-                                </ul>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#">Most recent</a></li>
+                                        <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
+                                        <li><a class="dropdown-item" href="#">Most upvoted</a></li>
+                                    </ul>
                             </li>
 
                             <li class="nav-item dropdown">
@@ -167,7 +177,7 @@
                         </ul>
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search tags" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
                         </form>
                     </div>
                 </div>
@@ -176,11 +186,11 @@
             <! –– List of questions ––>
             <div class="list-group">
                 {{#each questions}}
-                <a href="/each_question/{{_id}}" method="GET" class="list-group-item list-group-item-action">
+                <a href="/each_question/id={{_id}}" method="GET" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{title}}</h5>
-                    <small>{{date_and_time}}</small>
-                    </div>
+                        <h5 class="mb-1">{{title}}</h5>
+                        <small>{{date_and_time}}</small>
+                    </div> 
                     <p class="mb-1">{{body}}</p>
                     <small>{{tags}}</small>
                 </a>
@@ -207,7 +217,14 @@
 
         <! –– Right column ––>
         <div class="col">
-            Column
+            <div class="card" style="width: 14rem;">
+                <img src="Images/good_question.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">What makes a good question?</h5>
+                    <p class="card-text">Discover tips to form a great questions</p>
+                    <a href="#" class="btn btn-primary">Tips</a>
+                </div>
+            </div>
         </div>
     </div>
    

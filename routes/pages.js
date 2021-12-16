@@ -16,6 +16,17 @@ router.get('/', authController.isLoggedIn, questionController.populateQuestions,
 });
 
 
+router.get('/index', authController.isLoggedIn, (req,res) => {
+    if (req.user) {
+        res.render('index', {
+            user: req.user
+        }); 
+    } else {
+        res.render('index');
+    }
+});
+
+
 router.get('/tags', authController.isLoggedIn, questionController.populateTags, (req,res) => {
     if (req.user) {
         res.render('list_of_tags', {
@@ -62,13 +73,25 @@ router.get('/login', (req,res) => {
 });
 
 
-router.get('/each_question/:id', authController.isLoggedIn,  questionController.questionInfo, (req,res) => {
+router.get('/each_question/id=:id', authController.isLoggedIn, questionController.questionInfo, (req,res) => {
     if(req.user) {
         res.render('each_question', {
             instance: req.instance
         });
     } else {
         res.redirect('/login');
+    }
+});
+
+
+router.get('/profile/:userid/:fname:lname', authController.isLoggedIn, authController.userProfileInfo, (req,res) => {
+    if (req.user) {
+        res.render('profile', {
+            user: req.user, 
+            instance: req.instance
+        }); 
+    } else {
+        res.redirect('/login'); 
     }
 });
 

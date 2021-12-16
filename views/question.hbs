@@ -24,10 +24,21 @@
 <body>
     <! –– The purple part ––>
     <nav>
-        <h4><a class="text-white text-decoration-none" href="/">Clark Stack Overflow</a></h4>
+        <h4><a class="text-white text-decoration-none" href="/">CougarAsk</a></h4>
+        <! –– Nav bar ––>
         <ul>
-            <li><a href="/settings">Settings</a></li>
-            <li><a href="/auth/logout">Log Out</a></li>
+            <li><a href="/index">About</a></li>
+            <li><a href="/">Question Feed</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                    <img src="/Images/clark_logo.png" style="width: 25px; height: 25px" class="profile-image img-circle">
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/profile/{{user.id}}/{{user.fname}}{{user.lname}}" class="dropdown-item">{{user.fname}}'s Profile</a></li>
+                    <li><a href="/settings" class="dropdown-item">Settings</a></li>
+                    <li><a href="/auth/logout" class="dropdown-item">Log Out</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 

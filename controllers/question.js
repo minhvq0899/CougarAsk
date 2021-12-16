@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 
 // Create schemas
 const questionSchema = new mongoose.Schema({
-    email: String, 
-    username: String,
+    fname: String, 
+    lname: String,
     title: String, 
     major: String,
     body: String, 
     tags: Array, 
-    date_and_time: { type: Date, default: Date.now },
+    date_and_time: { type: String, default: new Date().toString() } , 
+    upvote: { type: Number, default: 0 },
     resolved: { type: Boolean, default: false } 
 }) 
 
@@ -21,7 +22,6 @@ const Questions = mongoose.model('Questions', questionSchema);
 exports.ask_fn = (req, res) => {
     console.log( "req.body: ", req.body);
     const { title, major, body, tag } = req.body; 
-    console.log("User " + req.user.email + " just posted a question"); 
 
     // Validate input
     // Missing a field
@@ -33,8 +33,8 @@ exports.ask_fn = (req, res) => {
     async function insertDes() {
         var tag_list = tag.split(","); 
         const question = new Questions({
-            email: req.user.email,
-            username: "empty",
+            fname: req.user.fname,
+            lname: req.user.lname,
             title: title, 
             major: major,   
             body: body, 
@@ -45,6 +45,7 @@ exports.ask_fn = (req, res) => {
         // console.log( "result: ", result);
         if (result) {
             req.session.message_success = "Successful!"; 
+            console.log("User " + req.user.email + " just posted a question"); 
             return res.redirect('/question'); 
         } else {
             req.session.message_fail = "Unsuccessful! Please try again!"; 
@@ -57,17 +58,68 @@ exports.ask_fn = (req, res) => {
 
 
 exports.populateQuestions = async (req, res, next) => {
+    var month_dict = {"Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06", "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12"}; 
+
     if (req.user){
+        var now = new Date().toString().split(" "); 
+        // console.log("now: ", now); 
+        var month_now = month_dict[now[1]];
+        var day_now = now[2];
+        var year_now = now[3];
+        var now_date_format = new Date(month_now + "/" + day_now + "/" + year_now); 
+        
         try {
-            const question_list = await Questions.find({}); 
+            const ques_list = await Questions.find({}); 
 
-            if (!question_list) return next();
+            if (!ques_list) return next();
 
-            var string = JSON.stringify(question_list);
-            var ques_list = JSON.parse(string);
+            // var string = JSON.stringify(question_list);
+            // var ques_list = JSON.parse(string);
 
             for (var i = 0; i < ques_list.length; i++) {
-                ques_list[i]["date_and_time"] = ques_list[i]["date_and_time"].substring(0, 19);
+                // For Date and Time
+                var question_time = ques_list[i]["date_and_time"].split(" "); 
+                // console.log("question_time: ", question_time); 
+                var month_ques = month_dict[question_time[1]];
+                var day_ques = question_time[2];
+                var year_ques = question_time[3];
+                var question_date_format = new Date(month_ques + "/" + day_ques + "/" + year_ques); 
+
+                var diffDays = parseInt((now_date_format - question_date_format) / (1000 * 60 * 60 * 24)); //gives day difference 
+                // console.log("diffDays: ", diffDays); 
+
+                if (diffDays == 0) {
+                    var hour_now =  parseInt(now[4].substring(0, 2));
+                    var minute_now =  parseInt(now[4].substring(3, 5));
+                    var hour_ques =  parseInt(question_time[4].substring(0, 2));
+                    var minute_ques =  parseInt(question_time[4].substring(3, 5));
+                    var diffHour = Math.max(0, hour_now - hour_ques - 1) // * 60 + minute_now + (60-minute_ques); 
+                    // console.log("diffHour: ", diffHour); 
+                    
+                    if (diffHour == 0) {
+                        if (hour_ques == hour_now) {
+                            var diffMinute = minute_now - minute_ques; 
+                            ques_list[i]["date_and_time"] = diffMinute.toString() + " minutes ago"; 
+                        } else {
+                            var diffMinute = minute_now + (60-minute_ques); 
+                            ques_list[i]["date_and_time"] = diffMinute.toString() + " minutes ago"; 
+                        }
+                    } else {
+                        if (diffHour < 2) {
+                            ques_list[i]["date_and_time"] = diffHour.toString() + " hour ago"; 
+                        } else {
+                            ques_list[i]["date_and_time"] = diffHour.toString() + " hours ago"; 
+                        }
+                    }
+                } else if (diffDays == 1) {
+                    ques_list[i]["date_and_time"] = "Yesterday"; 
+                } else if (1 < diffDays && diffDays < 8) {
+                    ques_list[i]["date_and_time"] = diffDays.toString() + " days ago"; 
+                } else {
+                    ques_list[i]["date_and_time"] = question_time[1] + " " + day_ques + ", " + year_ques; 
+                }
+
+                // For Tags
                 for (var j = 0; j < ques_list[i]["tags"].length; j++) {
                     ques_list[i]["tags"][j] = "#" + ques_list[i]["tags"][j]; 
                 }
@@ -119,10 +171,10 @@ exports.populateTags = async (req, res, next) => {
 
 exports.questionInfo = async (req, res, next) => {
     try {
-        const oneQuestion = await Questions.find({_id: req.params.id}); 
+        const instance = await Questions.find({_id: req.params.id}); 
         
-        var string = JSON.stringify(oneQuestion);
-        var instance = JSON.parse(string);
+        // var string = JSON.stringify(oneQuestion);
+        // var instance = JSON.parse(string);
 
         instance[0]["date_and_time"] = instance[0]["date_and_time"].substring(0, 19);
         for (var j = 0; j < instance[0]["tags"].length; j++) {

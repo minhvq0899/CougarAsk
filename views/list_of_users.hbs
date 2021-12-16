@@ -14,14 +14,34 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 <body>
     <! –– The purple part ––>
     <nav>
         <h4><a class="text-white text-decoration-none" href="/">CougarAsk</a></h4>
         <! –– Nav bar ––>
         <ul>
-            <li><a href="/settings">{{user.fname}}'s Settings</a></li>
-            <li><a href="/auth/logout">Log Out</a></li>
+            <li><a href="/index">About</a></li>
+            <li><a href="/">Question Feed</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                    <img src="/Images/clark_logo.png" style="width: 25px; height: 25px" class="profile-image img-circle">
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/profile/{{user.id}}/{{user.fname}}{{user.lname}}" class="dropdown-item">{{user.fname}}'s Profile</a></li>
+                    <li><a href="/settings" class="dropdown-item">Settings</a></li>
+                    <li><a href="/auth/logout" class="dropdown-item">Log Out</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 
@@ -176,12 +196,14 @@
             <! –– Grid ––>
             <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
                 <div class="col">
-                    <div class="p-5">
-                        
-                    </div>
+                    <a class="p-5">
+                        Minh
+                    </a>
                 </div>
                 <div class="col">
-                    <div class="p-5 border bg-light">Row column</div>
+                    <a href="/">
+                        <div class="p-5 border bg-light">Row column</div>
+                    </a>
                 </div>
                 <div class="col">
                     <div class="p-3 border bg-light">Row column</div>
@@ -241,6 +263,18 @@
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -273,10 +273,10 @@ exports.populateUsers = async (req, res, next) => {
 
             if (!user_list) return next();
 
-            var string = JSON.stringify(user_list);
-            var user_list_final = JSON.parse(string);
+            // var string = JSON.stringify(user_list);
+            // var user_list_final = JSON.parse(string);
 
-            req.users_list = user_list_final; 
+            req.users_list = user_list; 
             return next();
         } catch (error) {
             console.log(error);
@@ -287,6 +287,36 @@ exports.populateUsers = async (req, res, next) => {
         return next();
     }
 }
+
+
+
+
+
+
+// ************************************************************** Give one user info **************************************************************
+exports.userProfileInfo = async (req, res, next) => {
+    try {
+        const instance = await Users.find({_id: req.params.userid}); 
+        
+        // var string = JSON.stringify(oneQuestion);
+        // var instance = JSON.parse(string);
+        
+        req.instance = instance[0]; 
+        return next();
+    } catch (error) {
+        console.log(error);
+        return next();
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 
