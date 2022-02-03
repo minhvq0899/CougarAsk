@@ -7,6 +7,50 @@
     <link rel="stylesheet" href="/style.css">
     <script defer src="../node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script> <!--load all styles -->
     <title>Tags</title>
+
+    <style>
+        .tags-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 0.5em; 
+        }
+
+        .tags-card {
+            padding: 20px;
+            /* Center child horizontally*/
+            display: flex;
+            justify-content: center;
+        }
+
+        /*
+        .tags-card:hover {
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        */ 
+
+        .neon-button {
+            font-size: 1rem;
+            display: inline-block;
+            cursor: pointer;
+            text-decoration: none;
+            color: #8c38ff; 
+            border:  #8c38ff 0.125em solid; 
+            padding: 0.1em 0.5em;
+            border-radius: .5em;
+        }
+
+        .neon-button:hover {
+            background: #8c38ff;
+            color: #fff;
+            text-shadow: none;
+        }
+
+        .tags-link .neon-button {
+            text-decoration: none;
+        }
+
+    </style>
+
 </head>
 
 
@@ -36,21 +80,23 @@
     </nav>
 
     <! –– ---------------------The three columns--------------------- ––>
-    <div class="row">
-        <! –– Left column ––>
-        <div class="col">
-            <div class="list-group">
-                <a href="/" class="list-group-item list-group-item-action list-group-item-secondary">Feed</a>
-                <a href="/tags" class="list-group-item list-group-item-action list-group-item-secondary">List of tags</a>
-                <a href="/users" class="list-group-item list-group-item-action list-group-item-secondary">List of users</a>
+    <div class="css-grid">
+        <! –– Column 1 ––>
+        <div class="col1">
+            <div class="sidebar">
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i>   Home</a></li>
+                    <li><a href="/users"><i class="fas fa-users"></i>   List of users</a></li>
+                    <li><a href="/tags"><i class="fas fa-hashtag"></i>   List of tags</a></li>
+                </ul>
             </div>
         </div>
 
-        <! –– Middle column ––>
-        <div class="col-8">
+        <! –– Column 2 ––>
+        <div class="col2">
             <! –– Text and Button ––>
             <div class="row position-relative">
-                <div class="col">
+                <div class="col-8">
                     <p class="fs-1">Tags</p>
                     <p class="text-start">A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.</p>
                     <p class="text-start"><strong> Total: {{list_of_tags.length}} tags </strong></p>
@@ -183,12 +229,48 @@
                 </div>
             </nav>
             <! –– End of nav bar ––>
+            <script>
+                $(document).ready(function() {
+                    $('.clickable').click(function() {
+                        window.location = $(this).find("a").attr("href");
+                    }); 
+                });
+            </script>
 
+            <! –– Grid ––>
+            <div class="tags-grid">
+                {{#each list_of_tags}}
+                <div class="slot">
+                    <div class="tags-card">
+                        <div class="neon-button clickable">
+                            <a href="/index"></a>
+                            #{{this}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
 
+            <! –– Pagination ––>
+            <ul class="pagination justify-content-end">
+                <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                </li>
+            </ul>   
         </div>
             
         <! –– Right column ––>
-        <div class="col">
+        <div class="col3">
             Column
         </div>
     </div>

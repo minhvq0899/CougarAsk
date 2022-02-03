@@ -24,6 +24,7 @@
     "hbs": "^4.1.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
+    "marked": "^4.0.8",
     "method-override": "^3.0.0",
     "mongoose": "^5.13.3",
     "multer": "^1.4.3",
@@ -31,6 +32,7 @@
     "mysql": "^2.18.1",
     "nodemailer": "^6.6.3",
     "nodemon": "^2.0.9",
+    "react-bootstrap": "^2.0.4",
     "tzdata": "^1.0.29"
   }
 }

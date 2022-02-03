@@ -6,14 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
     <script defer src="../node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script> <!--load all styles -->
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <title>Main page</title>
-
-    <style>
-        col {
-            border-right: 1px solid rgba(0,0,0,0.05);
-        }
-    </style>
 </head>
 
 
@@ -22,9 +15,10 @@
 
 
 <body>
-    <! –– Nav bar ––>
+    <! –– The purple part ––>
     <nav>
         <h4><a class="text-white text-decoration-none" href="/">CougarAsk</a></h4>
+        <! –– Nav bar ––>
         <ul>
             <li><a href="/index">About</a></li>
             <li><a href="/">Question Feed</a></li>
@@ -42,24 +36,22 @@
     </nav>
 
     <! –– ---------------------The three columns--------------------- ––>
-    <div class="css-grid">
-        <! –– Column 1 ––>
-        <div class="col1">
-            <div class="sidebar">
-                <ul>
-                    <li><a href="/"><i class="fas fa-home"></i>   Home</a></li>
-                    <li><a href="/users"><i class="fas fa-users"></i>   List of users</a></li>
-                    <li><a href="/tags"><i class="fas fa-hashtag"></i>   List of tags</a></li>
-                </ul>
+    <div class="row">
+        <! –– Left column ––>
+        <div class="col">
+            <div class="list-group">
+                <a href="/" class="list-group-item list-group-item-action list-group-item-secondary">Question Feed</a>
+                <a href="/tags" class="list-group-item list-group-item-action list-group-item-secondary">List of tags</a>
+                <a href="/users" class="list-group-item list-group-item-action list-group-item-secondary">List of users</a>
             </div>
         </div>
-        
-        <! –– Column 2 ––>
-        <div class="col2">
+
+        <! –– Middle column ––>
+        <div class="col-8 position-relative">
             <div class="row position-relative">
                 <div class="col">
-                    <p class="fs-1">All Questions</p>
-                    <p class="text-start"><strong>Total: {{questions.length}} questions</strong></p>
+                    <p class="fs-1">Questions with tag [{{main_tag}}]</p>
+                    <p class="text-start"><strong>Total: {{questionsTagged.length}} questions</strong></p>
                 </div>
                 <div class="col  position-relative"> 
                     <a class="btn btn-primary me-md-2 position-absolute top-50 end-0" href="/question" role="button">Ask a question</a>
@@ -193,7 +185,7 @@
 
             <! –– List of questions ––>
             <div class="list-group">
-                {{#each questions}}
+                {{#each questionsTagged}}
                 <a href="/each_question/id={{_id}}" method="GET" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{title}}</h5>
@@ -223,20 +215,12 @@
             </ul>
         </div>
 
-        <! –– Column 3 ––>
-        <div class="col3">
-            {{!-- <div class="card" style="width: 14rem;">
-                <img src="Images/good_question.jpg" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">What makes a good question?</h5>
-                    <p class="card-text">Discover tips to form a great questions</p>
-                    <a href="#" class="btn btn-primary">Tips</a>
-                </div>
-            </div> --}}
+        <! –– Right column ––>
+        <div class="col">
+            Right column
         </div>
-    </div>  
-    <! --  End of css-grid -->
-
+    </div>
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 

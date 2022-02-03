@@ -78,11 +78,20 @@ const Users = mongoose.model('Users', userSchema);
 // ************************************************************** Register, Login and Logout **************************************************************
 // A FUNCTION to handle a POST request for register
 exports.register_fn = (req, res) => {
-    const { first_name, last_name, grad_year, role, email, password, password_confirm } = req.body; 
+    console.log("Register body: ", req.body)
+    const { first_name, last_name, role, grad_year, major, email, password, password_confirm } = req.body; 
+    console.log("first_name: ", first_name)
+    console.log(last_name)
+    console.log(role)
+    console.log(grad_year)
+    console.log(major)
+    console.log(email)
+    console.log(password)
+    console.log(password_confirm)
 
     // Validate input
     // Missing a field
-    if (first_name == "" || last_name == "" || grad_year == "" || role == "" || email == "" || password == "" || password_confirm == "") {
+    if (first_name == "" || last_name == "" || grad_year == "" || role == "" || major =="" || email == "" || password == "" || password_confirm == "") {
         req.session.message_fail = "Missing one or more fields"; 
         return res.redirect('/register'); 
     }
@@ -101,7 +110,7 @@ exports.register_fn = (req, res) => {
             last_name: last_name,
             grad_year: grad_year, 
             role: role,
-            major: null, 
+            major: major, 
             profile_picture: null,
             email: email,
             password: hashedPassword
@@ -296,7 +305,7 @@ exports.populateUsers = async (req, res, next) => {
 // ************************************************************** Give one user info **************************************************************
 exports.userProfileInfo = async (req, res, next) => {
     try {
-        const instance = await Users.find({_id: req.params.userid}); 
+        const instance = await Users.find({_id: req.params.userid}, {password:0}); 
         
         // var string = JSON.stringify(oneQuestion);
         // var instance = JSON.parse(string);

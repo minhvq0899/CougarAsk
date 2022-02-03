@@ -6,8 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
+    <style>
+        button {
+            margin-left: 10px;
+            margin-bottom: 30px;
+        }
+    </style>
+
     <title>Register</title>
 </head>
+
+
+
+
+
+
+
 
 
 
@@ -22,70 +36,82 @@
         </ul>
     </nav>
 
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-header">
-                Register Form
-            </div>
-            <div class="card-body">
-                <form action="/auth/register" method = "POST">   
-                    <div class="form-group">
-                        <label for="first_name">First Name</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name">
-                    </div>
+    <main>
+        <section class="glass">
+            <div class="container">
+                <form id="formRegister" action="/auth/register" method = "POST">
+                    <ul class="form-style-1">
+                        <li>
+                            <label for="first_name">Full Name <span class="required">*</span></label>
+                            <input type="text" name="first_name" id="first_name" class="field-divided" placeholder="First" /> 
+                            <input type="text" name="last_name" id="last_name" class="field-divided" placeholder="Last" />
+                        </li>
+                        <li>
+                            <label>Role<span class="required">*</span></label>
+                            <select name="role" id="role" class="field-select">
+                                <option value=> </option>
+                                <option value="Alumnae">Alumnae</option>
+                                <option value="Professor">Professor</option>
+                                <option value="Student">Staff</option>
+                                <option value="Student">Student</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="grad_year">Class of</label>
+                            <input type="number" name="grad_year" id="grad_year" class="field-long" placeholder="Eg: 2024"/>
+                        </li>
+                        <li>
+                            <label>Major<span class="required">*</span></label>
+                            <input type="text" name="major" id="major" class="field-long" />
+                        </li>
+                        <li>
+                            <label>Email<span class="required">*</span></label>
+                            <input type="email" name="email" id="email" class="field-long" />
+                        </li>
+                        <li>
+                            <label>Password<span class="required">*</span></label>
+                            <input type="password" name="password" id="password" class="field-long" />
+                        </li>
+                        <li>
+                            <label>Confirm Password<span class="required">*</span></label>
+                            <input type="password" name="password_confirm" id="password_confirm" class="field-long" />
+                        </li>
+                    </ul> 
 
-                    <div class="form-group">
-                        <label for="last_name">Last Name</label>
-                        <input type="text" class="form-control" id="last_name" name="last_name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="grad_year">Year of Graduation</label>
-                        <input type="number" class="form-control" id="grad_year" placeholder="e.g. 2023" name="grad_year">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="role">Role</label>
-                        <select type="text" class="form-control" id="role" name="role">
-                            <option value=>Select</option>
-                            <option value=Student>Student</option>
-                            <option value=Professor>Professor</option>
-                            <option value=Alumni>Alumni</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" class="form-control" id="email" placeholder="e.g. email@clarku.edu" name="email">
-                        <small id="email" class="form-text text-muted">Must be a Clark email</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password_confirm">Confirm Password</label>
-                        <input type="password" class="form-control" id="password_confirm" name="password_confirm">
-                     </div>
-
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" onclick="submitFn()" class="btn btn-primary">Register</button>                        
                 </form>
+
+                <script>
+                function submitFn() {
+                    document.getElementById("formRegister").submit();
+                }
+                </script>
+
+                {{#if message_fail }}
+                    <h4 class="alert alert-danger mt-4">{{message_fail}}</h4>
+                {{/if}}
+                {{#if message_success}}
+                    <h4 class="alert alert-success mt-4">{{message_success}}</h4>
+                {{/if}}
             </div>
-        </div>
+        </section>
+    </main>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
 
-        {{#if message_fail }}
-            <h4 class="alert alert-danger mt-4">{{message_fail}}</h4>
-        {{/if}}
-        {{#if message_success}}
-            <h4 class="alert alert-success mt-4">{{message_success}}</h4>
-        {{/if}}
-
-    </div>
-
+    
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 </body>
+
+
+
+
+
+
+
+
+
+
 
 
 
