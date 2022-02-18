@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
-    <script defer src="../node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script> <!--load all styles -->
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            
+    <!--Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!--Font Awesome library-->
+    <script src="https://kit.fontawesome.com/e5b5eed843.js" crossorigin="anonymous"></script>
+    
     <title>Main page</title>
+
 </head>
 
 
@@ -15,45 +28,102 @@
 
 
 <body>
-    <! –– The purple part ––>
-    <nav>
-        <h4><a class="text-white text-decoration-none" href="/">CougarAsk</a></h4>
-        {{#if user}}
-        <! –– Nav bar ––>
-        <ul>
-            <li><a href="/index">About</a></li>
-            <li><a href="/">Question Feed</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="/Images/clark_logo.png" style="width: 25px; height: 25px" class="profile-image img-circle">
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/profile/{{user.id}}/{{user.fname}}{{user.lname}}" class="dropdown-item">{{user.fname}}'s Profile</a></li>
-                    <li><a href="/settings" class="dropdown-item">Settings</a></li>
-                    <li><a href="/auth/logout" class="dropdown-item">Log Out</a></li>
+    <!-- Nav Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">CougarAsk</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{#if user}}
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/index">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" >Question Feed</a>
+                    </li>
+                    <li class="dropdown" >
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                            <img src="/Images/clark_logo.png" style="width: 25px; height: 25px" class="profile-image img-circle">
+                        </a>
+                        <ul class="dropdown-menu" style="background-color: grey;">
+                            <li><a href="/profile/{{user.id}}/{{user.fname}}{{user.lname}}" class="dropdown-item">{{user.fname}}'s Profile</a></li>
+                            <li><a href="/settings" class="dropdown-item">Settings</a></li>
+                            <li><a href="/auth/logout" class="dropdown-item">Log Out</a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-        </ul>
-        {{else}}
-        <! –– Nav bar ––>
-        <ul>
-            <li><a href="/login">Login</a></li>         
-            <li><a href="/register">Register</a></li>
-        </ul>
-        {{/if}}
-    </nav>
-
-    <main>
-        <! –– Welcome/ Hello ––>
-        <div class="container mt-4">
-            <div class="jumbotron text-center">
-                <h1 class="display-4">Welcome to CougerAsk</h1>
-                <p class="lead">CougarAsk is a platform for Clark students, professors, alumnae, and staffs to post questions and answers in a wide range of majors</p>
-                <hr class="my-4">
-                <p>Please login to ask a question or register an account with a Clark email if you are new</p>
+                {{else}}
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <li><a href="/login">Login</a></li>   
+                        </li>
+                        <li class="nav-item">
+                            <li><a href="/register">Register</a></li>
+                        </li>
+                    </ul>
+                </div>
+                {{/if}}
             </div>
         </div>
+    </nav>
 
+
+    <!-- Body -->
+    <section id="main-row-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 my-md-5">
+                    <div class="neon-logo">CougarAsk</div>
+                </div>
+                <div class="col-lg-6 my-md-5">
+                    <p class="lead">CougarAsk is a platform for Clark students, professors, alumnae, and staffs to post questions and answers in a wide range of majors</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="main-row-2">
+        <div class="container">
+           What Clarkies say about CougarAsk
+        </div>
+    </section>
+    
+    <section id="main-row-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 my-md-5">
+                    <p>Learn more about Clark</p>
+                </div>
+                <div class="col-md-9 my-md-5">
+                    <div class="row row-cols-2">    
+                        <div class="col" align = "center">
+                            <img src="Images/clark.jpg" class="img-thumbnail" style="max-width:65%;" alt="Jonas Clark">
+                            <p class="text-center">Clark University is a private research university in Worcester, Massachusetts. Founded in 1887 
+                                                with a large endowment from its namesake Jonas Gilman Clark, a prominent businessman, Clark was one 
+                                                of the first modern research universities in the United States. Learn more about Clark <a class="text-blue text-decoration-none" href="https://www.clarku.edu/" role="button">here.</a> </p>
+                        </div>
+                        <div class="col" align = "center">
+                            <img src="Images/campus-police-banner.jpg " class="img-thumbnail" style="max-width:80%;" alt="Clark Police">
+                            <p class="text-center">If it is dark outside and you cannot book a ride, try to contact <a class="text-blue text-decoration-none" href="https://www.clarku.edu/offices/university-police/" role="button">Clark Police.</a> </p>
+                        </div>
+                </div>
+            </div>
+
+            <div class="embed-responsive embed-responsive-16by9" align = "center">
+                <iframe width="840" height="473" class="embed-responsive-item" src="https://www.youtube.com/embed/7egh9xW_2V8" allowfullscreen></iframe>
+                <p class="text-center">Learn more about the campus.</p>
+            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{!-- <div class="row2">
         <div class="container mt-4">
             <div class="p-3 mb-2 bg-secondary text-white text-center">If you want to know more about Clark, check out these links</div>
             <div class="row row-cols-2">    
@@ -74,10 +144,8 @@
                 <p class="text-center">Learn more about the campus.</p>
             </div>
         </div>
-    </main>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    </div> --}}
+ 
 </body>
 
 
