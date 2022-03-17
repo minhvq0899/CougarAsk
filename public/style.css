@@ -231,21 +231,133 @@ p.form_title {
 
 /* -------------------- Side Nav Bar -------------------- */
 .css-grid .col1 {
-    background-color: #6e61b1;
+    display: flex;
 }
 
 .css-grid .col2 {
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .sidebar {
-    position: fixed;
-    width: 200px;
-    height: 100%; 
-    padding: 30px 0;
+    /* position: fixed; */
+    flex: 1 1 0; 
+    max-width: 300px;
+    padding: 2rem 1.25rem;
 }
 
-.sidebar ul li{
+.sidebar h3 {
+    font-size: 1.25rem; 
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+    color: var(--primary);
+}
+
+.sidebar .menu {
+    background-color: var(--light);
+    margin: 0 -1rem; 
+    border-bottom: none;
+}
+
+.sidebar .menu .menu-item {
+    display: block; 
+    padding: 1em;
+    color: var(--dark);
+    text-decoration: none;
+    transition: 0.2s linear;
+}
+
+.sidebar .menu .menu-item:hover,
+.sidebar .menu .menu-item.is-active {
+    color: var(--primary);
+    border-right: 5px solid var(--primary);
+}
+
+.menu-toggle {
+    display: none; 
+    position: fixed;
+    top: 30rem; 
+    left: 1.5rem; 
+    width: 60px; 
+    height: 60px; 
+    border-radius: 99px; 
+    background-color: var(--primary);
+    cursor: pointer; 
+}
+
+.hamburger {
+    position: relative; 
+    top: calc(50% - 2px); 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 32px; 
+}
+
+.hamburger > span, 
+.hamburger > span::before, 
+.hamburger > span::after {
+    display: block; 
+    position: absolute; 
+    width: 100%; 
+    height: 4px; 
+    border-radius: 99px;
+    background-color: var(--light); 
+    transition-duration: .25s;
+}
+
+.hamburger > span::before {
+    content: '';
+    top: -8px; 
+}
+
+.hamburger > span::after {
+    content: '';
+    top: 8px; 
+}
+
+.menu-toggle.is-active .hamburger > span {
+    transform: rotate(45deg);
+}
+.menu-toggle.is-active .hamburger > span::before {
+    top: 0; 
+    transform: rotate(0deg); 
+}
+.menu-toggle.is-active .hamburger > span::after {
+    top: 0; 
+    transform: rotate(90deg); 
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .content {
+        padding-top: 8rem;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0; 
+        left: -300px;
+        height: 100vh; 
+        width: 100%; 
+        max-width: 300px;
+        transition: 0.2s linear; 
+    }
+
+    .sidebar.is-active {
+        left: 0; 
+    }
+}
+
+
+/* .sidebar ul li{
     padding: 15px;
     list-style: none;
     border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -269,7 +381,7 @@ p.form_title {
 
 .sidebar ul li:hover a{
     color: var(--light); 
-}
+} */
 
 
 

@@ -15,6 +15,9 @@ const crypto = require('crypto');
 // -------------------------------------------------------------
 dotenv.config({ path: './.env'}); 
 
+
+
+
 const app = express(); 
 
 // Connect to a Database
@@ -98,6 +101,9 @@ app.use(session({
 app.use('/', require('./routes/pages')); 
 app.use('/auth', require('./routes/auth')); 
 app.use('/question', require('./routes/question')); 
+
+//      /auth/abc
+//      /routes/auth/abc
 
 app.listen(5000, () => {
     console.log("Server started on Port 5000"); 

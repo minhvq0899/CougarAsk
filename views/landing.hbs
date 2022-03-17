@@ -68,14 +68,38 @@
     <div class="css-grid">
         <! –– Column 1 ––>
         <div class="col1">
-            <div class="sidebar">
-                <ul>
-                    <li><a href="/"><i class="fas fa-home"></i>   Home</a></li>
-                    <li><a href="/users"><i class="fas fa-users"></i>   List of users</a></li>
-                    <li><a href="/tags"><i class="fas fa-hashtag"></i>   List of tags</a></li>
-                </ul>
+            <div class="menu-toggle">
+                <div class="hamburger">
+                    <span></span>
+                </div>
             </div>
+
+            <aside class="sidebar">
+                <h3>Menu</h3>
+                    
+                <nav class="menu">
+                    <a href="/" class="menu-item is-active"><i class="fas fa-home"></i>   Home</a>
+                    <a href="/users" class="menu-item"><i class="fas fa-users"></i>   List of users</a>
+                    <a href="/tags" class="menu-item"><i class="fas fa-hashtag"></i>   List of tags</a>
+                </nav>
+
+                <h3>Filter</h3>
+                <div class="filter">
+
+                </div>
+
+            </aside>
         </div>
+
+        <script>
+            const menu_toggle = document.querySelector('.menu-toggle'); 
+            const sidebar = document.querySelector('.sidebar');
+
+            menu_toggle.addEventListener('click', () => {
+                menu_toggle.classList.toggle("is-active"); 
+                sidebar.classList.toggle('is-active'); 
+            }) 
+        </script>
         
         <! –– Column 2 ––>
         <div class="col2">
@@ -247,7 +271,7 @@
         </div>
 
         <! –– Column 3 ––>
-        <div class="col3">
+        <div class="col3" id="col3">
             {{!-- <div class="card" style="width: 14rem;">
                 <img src="Images/good_question.jpg" class="card-img-top">
                 <div class="card-body">
@@ -259,7 +283,6 @@
         </div>
     </div>  
     <! --  End of css-grid -->
-
 </body>
 
 

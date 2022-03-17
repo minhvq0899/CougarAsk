@@ -2,6 +2,8 @@ const express = require('express');
 const authController = require('../controllers/auth');          // load a module
 const questionController = require('../controllers/question');   // load a module
 const router = express.Router();
+const path = require('path');
+
 
 // res.render() function is used to render a view
 router.get('/', authController.isLoggedIn, questionController.populateQuestions, (req,res) => {
@@ -143,6 +145,9 @@ router.get('/question', authController.isLoggedIn, (req,res) => {
     delete req.session.message_fail;
     delete req.session.message_success;
 });
+
+
+
 
 
 module.exports = router; 

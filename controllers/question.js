@@ -39,7 +39,7 @@ exports.ask_fn = (req, res) => {
         return res.redirect('/question'); 
     } 
 
-    async function insertDes() {
+    async function insertQuestion() {
         var tag_list = tag.split(","); 
         for (var i = 0; i < tag_list.length; i++) {
             tag_list[i] = tag_list[i].trim().toLowerCase(); 
@@ -66,7 +66,7 @@ exports.ask_fn = (req, res) => {
         }
     }
 
-    insertDes();
+    insertQuestion();
 }
 
 

@@ -2,7 +2,7 @@
   "name": "Escort_Web_App",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.js", 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
@@ -24,6 +24,7 @@
     "hbs": "^4.1.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
+    "markdown-to-txt": "^2.0.0",
     "marked": "^4.0.8",
     "method-override": "^3.0.0",
     "mongoose": "^5.13.3",
@@ -33,6 +34,7 @@
     "nodemailer": "^6.6.3",
     "nodemon": "^2.0.9",
     "react-bootstrap": "^2.0.4",
+    "showdown": "^2.0.2",
     "tzdata": "^1.0.29"
   }
 }
