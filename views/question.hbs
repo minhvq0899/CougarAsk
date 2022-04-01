@@ -25,15 +25,25 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script> -->
 
     <!--ShowDown-->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.0.2/showdown.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.0.3/showdown.min.js"></script>
 
+    
     <!--Google jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!--js file-->
-    <script src="/FrontendJS/mdPreviewer_browserify.js" defer></script>
+    <script src="/FrontendJS/mdPreviewer.js" defer></script>
+    {{!-- <script src="/FrontendJS/filter.js" defer></script> --}}
 
     <title>Ask a Question</title>
+
+    <style>
+        .question-grid {
+            display: grid; 
+            grid-template-columns: 15% 45% 40%;
+        }
+
+    </style>
 </head>
 
 
@@ -91,17 +101,35 @@
         </div>
     </nav>
 
-    <div class="css-grid">
+    <div class="question-grid">
         <! –– Left Column ––>
         <div class="col1">
-            <div class="sidebar">
-                <ul>
-                    <li><a href="/"><i class="fas fa-home"></i>   Home</a></li>
-                    <li><a href="/users"><i class="fas fa-users"></i>   List of users</a></li>
-                    <li><a href="/tags"><i class="fas fa-hashtag"></i>   List of tags</a></li>
-                </ul>
+            <div class="menu-toggle">
+                <div class="hamburger">
+                    <span></span>
+                </div>
             </div>
+
+            <aside class="sidebar">
+                <h3>Menu</h3>
+                    
+                <nav class="menu">
+                    <a href="/" class="menu-item"><i class="fas fa-home"></i>   Home</a>
+                    <a href="/users" class="menu-item"><i class="fas fa-users"></i>   List of users</a>
+                    <a href="/tags" class="menu-item"><i class="fas fa-hashtag"></i>   List of tags</a>
+                </nav>
+            </aside>
         </div>
+
+        <script>
+            const menu_toggle = document.querySelector('.menu-toggle'); 
+            const sidebar = document.querySelector('.sidebar');
+
+            menu_toggle.addEventListener('click', () => {
+                menu_toggle.classList.toggle("is-active"); 
+                sidebar.classList.toggle('is-active'); 
+            }) 
+        </script>
 
 
         <! –– Middle column ––>
@@ -119,13 +147,12 @@
                         <input type="text" name="major" id="major" class="field-long" placeholder="Computer Science"/>
                     </li>
                     <li>
-                        <label for="body">Body (In Markdown) <span class="required">*</span> </label>
-                        <input type="search" name="body" id="body" class="field-long" placeholder="Body?" onsearch="update_previewer()"/>
-                        {{!-- <textarea type="search" id="body" name="body" rows="5" class="field-long" form="postQuestion" onsearch="update_previewer()"> </textarea> --}}
+                        <label for="question_body">Body <span class="required">*</span> </label>
+                        <textarea type="text" name="question_body" id="question_body" rows="10" class="field-long" placeholder="(In Markdown)" onsearch="update_previewer()"> </textarea>
                     </li>
                     <li>
                         <label for="tag">Tags (separated by comma)</label>
-                        <input type="text" name="major" id="tag" class="field-long" placeholder="array, linkedlist, cs"/>
+                        <input type="text" name="tag" id="tag" class="field-long" placeholder="array, linkedlist, cs"/>
                     </li>
                     
                 </ul> 
@@ -139,8 +166,6 @@
             }
             </script>
 
-            <p id="md_previewer"> </p>
-
             {{#if message_fail }}
                 <h4 class="alert alert-danger mt-4">{{message_fail}}</h4>
             {{/if}}
@@ -150,63 +175,17 @@
         </div>
 
 
-        {{!-- <div class="col2">
-            <div class="container mt-4">
-                <! –– Form ––>
-                <div class="card" >
-                    <div class="card-header">
-                        Ask a Question
-                    </div>
-                    <div class="card-body">
-                        <form action="/question/ask" method = "POST">   
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" class="form-control" id="title" placeholder="e.g. Difference between Array and LinkedListed" name="title">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="major">Which major is the question about?</label>
-                                <select type="text" class="form-control" id="major" name="major">
-                                    <option value=>Select</option>
-                                    <option value= "Computer Science"> Computer Science </option>
-                                    <option value= "Data Science"> Data Science </option>
-                                    <option value= "Economics"> Economics </option>
-                                    <option value= "Psychology"> Psychology </option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="body">Body</label>
-                                <input type="text" class="form-control" id="body" name="body">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="tag">Tags (separated by comma)</label>
-                                <input type="text" class="form-control" id="tag" placeholder="e.g. array, linkedlist, cs" name="tag">
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Post question</button>
-                        </form>
-                    </div>
-                </div>
-
-
-                {{#if message_fail }}
-                    <h4 class="alert alert-danger mt-4">{{message_fail}}</h4>
-                {{/if}}
-                {{#if message_success}}
-                    <h4 class="alert alert-success mt-4">{{message_success}}</h4>
-                {{/if}}
-            </div>
-        </div> --}}
-
         <! –– Right column ––>
         <div class="col3">
-            Column3
+            <p class="form_title">Previewer</p>
+
+            <p id="md_previewer"> </p>
         </div>
     </div>
 
  
+    <br>
+    <br>
 
 </body>
 
@@ -216,6 +195,26 @@
 
 
 
+<footer class="bg-light text-center text-lg-start">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        <a class="text-dark text-decoration-none">Built by Minh Quang Vu, Clark 22' 
+            <p>
+                <a href="https://www.linkedin.com/in/minhvu0899/" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="purple" class="bi bi-linkedin" viewBox="0 0 16 16">
+                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                    </svg>
+                    <small class="d-md-none ms-2">Linkedin</small>
+                </a>
+
+                <a href="https://github.com/minhvq0899/Vans_web_app" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="purple" class="bi bi-github" viewBox="0 0 16 16">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                </a>
+            </p>
+        </a>
+    </div>
+</footer>
 
 
 

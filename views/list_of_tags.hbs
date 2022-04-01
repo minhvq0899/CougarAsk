@@ -18,6 +18,9 @@
     <!--Font Awesome library-->
     <script src="https://kit.fontawesome.com/e5b5eed843.js" crossorigin="anonymous"></script>
 
+    <!--JS-->
+    <script src="/FrontendJS/filter.js" defer></script>
+
     <title>Tags</title>
 
     <style>
@@ -106,14 +109,48 @@
     <div class="css-grid">
         <! –– Column 1 ––>
         <div class="col1">
-            <div class="sidebar">
-                <ul>
-                    <li><a href="/"><i class="fas fa-home"></i>   Home</a></li>
-                    <li><a href="/users"><i class="fas fa-users"></i>   List of users</a></li>
-                    <li><a href="/tags"><i class="fas fa-hashtag"></i>   List of tags</a></li>
-                </ul>
+            <div class="menu-toggle">
+                <div class="hamburger">
+                    <span></span>
+                </div>
             </div>
+
+            <aside class="sidebar">
+                <h3>Menu</h3>
+                    
+                <nav class="menu">
+                    <a href="/" class="menu-item"><i class="fas fa-home"></i>   Home</a>
+                    <a href="/users" class="menu-item"><i class="fas fa-users"></i>   List of users</a>
+                    <a href="/tags" class="menu-item"><i class="fas fa-hashtag"></i>   List of tags</a>
+                </nav>
+
+                <h3>Filter</h3>
+                <div class="filter">
+                    <!-- search box-->
+                    <div class="input-group mb-3">
+                        <input id="search_box" type="search" class="form-control" aria-label="Search"
+                            aria-describedby="basic-addon2" onsearch="search_filter()">
+                        <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+                    </div>
+            
+                    <!-- filter list-->
+                    <div>
+                        <ul id="filter_list" class="list-group"> </ul>
+                    </div>
+                </div>
+
+            </aside>
         </div>
+
+        <script>
+            const menu_toggle = document.querySelector('.menu-toggle'); 
+            const sidebar = document.querySelector('.sidebar');
+
+            menu_toggle.addEventListener('click', () => {
+                menu_toggle.classList.toggle("is-active"); 
+                sidebar.classList.toggle('is-active'); 
+            }) 
+        </script>
 
         <! –– Column 2 ––>
         <div class="col2">
@@ -128,130 +165,7 @@
                     <a class="btn btn-primary me-md-2 position-absolute top-50 end-0" href="/question" role="button">Ask a question</a>
                 </div>   
             </div>
-            <! –– Nav bar ––>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Home</a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sort by 
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Most recent</a></li>
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-                                    <li><a class="dropdown-item" href="#">Most upvoted</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sort by Major/ Minor
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Ancient Civilization</a></li>
-                                    <li><a class="dropdown-item" href="#">Art History</a></li>
-                                    <li><a class="dropdown-item" href="#">Art: 2-3D Art (Interactive Media Major)</a></li>
-                                    <li><a class="dropdown-item" href="#">Asian Studies</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Biochemistry and Molecular Biology</a></li>
-                                    <li><a class="dropdown-item" href="#">Biology</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Chemistry</a></li>
-                                    <li><a class="dropdown-item" href="#">Combined Languages</a></li>
-                                    <li><a class="dropdown-item" href="#">Community, Youth, and Education Studies</a></li>
-                                    <li><a class="dropdown-item" href="#">Comparative Literature</a></li>
-                                    <li><a class="dropdown-item" href="#">Computer Science</a></li>
-                                    <li><a class="dropdown-item" href="#">Creative Writing</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Data Science</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Economics</a></li>
-                                    <li><a class="dropdown-item" href="#">Education</a></li>
-                                    <li><a class="dropdown-item" href="#">English</a></li>
-                                    <li><a class="dropdown-item" href="#">Entrepreneurship and Innovation</a></li>
-                                    <li><a class="dropdown-item" href="#">Environmental Science</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">French and Francophone Studies</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Geography</a></li>
-                                    <li><a class="dropdown-item" href="#">German Studies</a></li>
-                                    <li><a class="dropdown-item" href="#">Global Environmental Studies</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">History</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Interactive Media</a></li>
-                                    <li><a class="dropdown-item" href="#">International Development and Social Change</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">German Studies</a></li>
-                                    <li><a class="dropdown-item" href="#">Global Environmental Studies</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Management</a></li>
-                                    <li><a class="dropdown-item" href="#">Marketing</a></li>
-                                    <li><a class="dropdown-item" href="#">Mathematics</a></li>
-                                    <li><a class="dropdown-item" href="#">Media, Culture, and the Arts</a></li>
-                                    <li><a class="dropdown-item" href="#">Music</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Philosophy</a></li>
-                                    <li><a class="dropdown-item" href="#">Physics</a></li>
-                                    <li><a class="dropdown-item" href="#">Political Science</a></li>
-                                    <li><a class="dropdown-item" href="#">Psychology</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Screen Studies</a></li>
-                                    <li><a class="dropdown-item" href="#">Sociology</a></li>
-                                    <li><a class="dropdown-item" href="#">Spanish</a></li>
-                                    <li><a class="dropdown-item" href="#">Studio Art</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Theatre Arts</a></li>
-
-                                    <li><hr class="dropdown-divider"></li> <! –– ===================================== ––>
-
-                                    <li><a class="dropdown-item" href="#">Women's and Gender Studies</a></li>
-
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled">Disabled</a>
-                            </li>
-                        </ul>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search tags" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-            <! –– End of nav bar ––>
+            
             <script>
                 $(document).ready(function() {
                     $('.clickable').click(function() {

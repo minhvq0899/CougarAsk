@@ -1,23 +1,16 @@
-const showdown = require('showdown');
-
+// Use Showdown package
 var converter = new showdown.Converter();
 
-var html = converter.makeHtml('#Hello world'); 
-
-let md_test = document.getElementById('md_previewer'); 
-md_test.innerHTML = html; 
-
+// Constantly write html
 function update_previewer() {
-    const currentBody = document.getElementById('#body').val().toLowerCase();
+    const currentBody = $('#question_body').val().toLowerCase();
     const htmlBody = converter.makeHtml(currentBody);
-    let md_test = document.getElementById('md_previewer'); 
-    md_test.innerHTML = currentBody; 
-
+    // console.log(htmlBody);
+    $('#md_previewer').html(htmlBody);  
 }
 
-// update_previewer();
 
-$('#body').on('keyup',update_previewer);
+$('#question_body').on('keyup',update_previewer);
 
 
 

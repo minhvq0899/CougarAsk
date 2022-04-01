@@ -19,7 +19,7 @@
 /* -------------------- CSS Grid -------------------- */
 .css-grid {
     display: grid; 
-    grid-template-columns: 15% 65% 20%;
+    grid-template-columns: 25% 60% 15%;
 }
 
 
@@ -235,7 +235,7 @@ p.form_title {
 }
 
 .css-grid .col2 {
-    margin-left: 20px;
+    z-index: 1;
 }
 
 .sidebar {
@@ -245,6 +245,15 @@ p.form_title {
     padding: 2rem 1.25rem;
 }
 
+.sidebar.is-active {
+    /* position: fixed; */
+    flex: 1 1 0; 
+    /* max-width: 300px; */
+    padding: 2rem 1.25rem;
+    background-color: var(--primary);
+    z-index: 2;
+}
+
 .sidebar h3 {
     font-size: 1.25rem; 
     text-transform: uppercase;
@@ -252,10 +261,25 @@ p.form_title {
     color: var(--primary);
 }
 
+.sidebar.is-active h3 {
+    font-size: 1.25rem; 
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+    color: var(--light);
+    z-index: 2;
+}
+
 .sidebar .menu {
     background-color: var(--light);
     margin: 0 -1rem; 
     border-bottom: none;
+}
+
+.sidebar.is-active .menu {
+    background-color: var(--primary);
+    margin: 0 -1rem; 
+    border-bottom: none;
+    z-index: 2;
 }
 
 .sidebar .menu .menu-item {
@@ -266,17 +290,31 @@ p.form_title {
     transition: 0.2s linear;
 }
 
+.sidebar.is-active .menu .menu-item {
+    display: block; 
+    padding: 1em;
+    color: var(--light);
+    text-decoration: none;
+    transition: 0.2s linear;
+    z-index: 2;
+}
+
 .sidebar .menu .menu-item:hover,
 .sidebar .menu .menu-item.is-active {
     color: var(--primary);
     border-right: 5px solid var(--primary);
 }
 
+.sidebar.is-active .menu .menu-item:hover {
+    color: var(--dark);
+    border-right: 5px solid var(--dark);
+}
+
 .menu-toggle {
     display: none; 
     position: fixed;
-    top: 30rem; 
-    left: 1.5rem; 
+    top: 5rem; 
+    right: 1.5rem; 
     width: 60px; 
     height: 60px; 
     border-radius: 99px; 

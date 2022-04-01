@@ -2,12 +2,13 @@ const express = require('express');
 const authController = require('../controllers/auth');          // load a module
 const questionController = require('../controllers/question');   // load a module
 const router = express.Router();
-const path = require('path');
 
+// let all_questions; 
 
 // res.render() function is used to render a view
 router.get('/', authController.isLoggedIn, questionController.populateQuestions, (req,res) => {
     if (req.user) {
+        // all_questions = req.questions;  
         res.render('landing', {
             user: req.user,
             questions: req.questions
@@ -91,6 +92,7 @@ router.get('/login', (req,res) => {
 router.get('/each_question/id=:id', authController.isLoggedIn, questionController.questionInfo, (req,res) => {
     if(req.user) {
         res.render('each_question', {
+            user: req.user,
             instance: req.instance
         });
     } else {

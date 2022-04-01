@@ -8,6 +8,7 @@ const questionSchema = new mongoose.Schema({
     major: String,
     body: String, 
     tags: Array, 
+    answers: Array,
     date_and_time: { type: String, default: new Date().toString() } , 
     upvote: { type: Number, default: 0 },
     resolved: { type: Boolean, default: false } 
@@ -30,11 +31,11 @@ const Questions = mongoose.model('Questions', questionSchema);
 // ************************************************************** Questions **************************************************************
 exports.ask_fn = (req, res) => {
     console.log( "req.body: ", req.body);
-    const { title, major, body, tag } = req.body; 
+    const { title, major, question_body, tag } = req.body; 
 
     // Validate input
     // Missing a field
-    if (title == "" || major == "" || body == "" || tag == "" ) {
+    if (title == "" || major == "" || question_body == "" || tag == "" ) {
         req.session.message_fail = "Missing one or more fields"; 
         return res.redirect('/question'); 
     } 
@@ -43,14 +44,13 @@ exports.ask_fn = (req, res) => {
         var tag_list = tag.split(","); 
         for (var i = 0; i < tag_list.length; i++) {
             tag_list[i] = tag_list[i].trim().toLowerCase(); 
-            console.log(tag_list[i] + " has length of " + tag_list[i].length); 
         }
         const question = new Questions({
             fname: req.user.fname,
             lname: req.user.lname,
             title: title, 
             major: major,   
-            body: body, 
+            body: question_body, 
             tags: tag_list
         })
 

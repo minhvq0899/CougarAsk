@@ -48,8 +48,7 @@ TZ = 'America/Boston';
 // app.use(rateLimit.rateLimiterUsingThirdParty); 
  
 
-
-
+/*
 const conn = mongoose.connection;
 
 let gfs; 
@@ -88,6 +87,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
     // res.json({ file: req.file });
     res.redirect('/settings');
 });
+*/
 
 
 // Cookie session
