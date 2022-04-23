@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 // Create schemas
 const questionSchema = new mongoose.Schema({
+    person_id: String,
     fname: String, 
     lname: String,
     title: String, 
@@ -18,6 +19,22 @@ const questionSchema = new mongoose.Schema({
 const Questions = mongoose.model('Questions', questionSchema);
 
 
+
+
+
+// const answerSchema = new mongoose.Schema({
+//     fname: String, 
+//     lname: String,
+//     body: String, 
+//     responses: Array,
+//     date_and_time: { type: String, default: new Date().toString() } , 
+//     upvote: { type: Number, default: 0 },
+// }) 
+
+// // Compile these schema into a model --> a class
+// const Answers = mongoose.model('Answers', answerSchema);
+
+
 /* Content:
     1. ask_fn
     2. populateQuestions
@@ -30,7 +47,7 @@ const Questions = mongoose.model('Questions', questionSchema);
 
 // ************************************************************** Questions **************************************************************
 exports.ask_fn = (req, res) => {
-    console.log( "req.body: ", req.body);
+    // console.log( "req.body: ", req.body);
     const { title, major, question_body, tag } = req.body; 
 
     // Validate input
@@ -46,6 +63,7 @@ exports.ask_fn = (req, res) => {
             tag_list[i] = tag_list[i].trim().toLowerCase(); 
         }
         const question = new Questions({
+            person_id: req.user.id,
             fname: req.user.fname,
             lname: req.user.lname,
             title: title, 
@@ -54,8 +72,10 @@ exports.ask_fn = (req, res) => {
             tags: tag_list
         })
 
+        console.log( "question: ", question);
+
         const result = await question.save(); 
-        // console.log( "result: ", result);
+        
         if (result) {
             req.session.message_success = "Successful!"; 
             console.log("User " + req.user.email + " just posted a question"); 
@@ -142,7 +162,7 @@ exports.populateQuestions = async (req, res, next) => {
                 }
             }
 
-            req.questions = ques_list; 
+            req.questions = ques_list.reverse(); 
             return next();
         } catch (error) {
             console.log(error);
@@ -278,7 +298,7 @@ exports.questionInfo = async (req, res, next) => {
         // var string = JSON.stringify(oneQuestion);
         // var instance = JSON.parse(string);
 
-        instance[0]["date_and_time"] = instance[0]["date_and_time"].substring(0, 19);
+        instance[0]["date_and_time"] = instance[0]["date_and_time"].substring(0, 15);
         for (var j = 0; j < instance[0]["tags"].length; j++) {
             instance[0]["tags"][j] = "#" + instance[0]["tags"][j]; 
         }

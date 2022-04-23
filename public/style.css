@@ -429,6 +429,28 @@ p.form_title {
 
 
 
+/* Each question  */
+.name-date a:link { 
+    color: var(--dark);
+    text-decoration: none; 
+}
+
+.name-date a:visited { 
+    color: var(--dark);
+    text-decoration: none; 
+}
+
+.name-date a:hover { 
+    color: var(--dark);
+    text-decoration: none; 
+}
+
+.name-date a:active { 
+    color: var(--dark);
+    text-decoration: none; 
+}
+
+
 
 
 
@@ -470,7 +492,3 @@ span {
     text-align: right;
 }
 
-
-footer {
-    z-index: 10;
-}

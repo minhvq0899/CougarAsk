@@ -101,11 +101,11 @@
 
                     <!-- radio buttons-->
                     <div style="padding: 5% 0">
-                        <div class="form-check">
+                        {{!-- <div class="form-check">
                             <input class="form-check-input" type="radio" name="sort_by" id="most_recent" value="most_recent"
                                 onclick="checked_box()">
                             <label class="form-check-label" for="most_recent">Most Recent</label>
-                        </div>
+                        </div> --}}
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="sort_by" id="most_upvoted" value="most_upvoted"
                                 onclick="checked_box()">
@@ -161,19 +161,6 @@
                 </li>      
                 {{/each}}                
             </ul>
-
-            {{!-- <div class="list-group">
-                {{#each questions}}
-                <a href="/each_question/id={{_id}}" method="GET" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{title}}</h5>
-                        <small>{{date_and_time}}</small>
-                    </div> 
-                    <p class="mb-1">{{body}}</p>
-                    <small>{{tags}}</small>
-                </a>
-                {{/each}}
-            </div> --}}
 
             <! –– Pagination ––>
             <ul class="pagination justify-content-end">

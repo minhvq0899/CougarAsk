@@ -15,11 +15,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <!--ShowDown-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.0.3/showdown.min.js"></script>
+
     <!--Font Awesome library-->
     <script src="https://kit.fontawesome.com/e5b5eed843.js" crossorigin="anonymous"></script>
     
     <!--JS-->
     <script src="/FrontendJS/filter.js" defer></script>
+    <script src="/FrontendJS/each_question.js" defer></script>
+
+    <style>
+        .css-grid-each-question {
+            display: grid; 
+            grid-template-columns: 25% 65%;
+        }
+    </style>
 
     <title>Each question</title>
 </head>
@@ -75,7 +86,7 @@
     </nav>
 
     <! –– ---------------------The three columns--------------------- ––>
-    <div class="css-grid">
+    <div class="css-grid-each-question">
         <! –– Left column ––>
         <div class="col1">
             <div class="menu-toggle">
@@ -91,37 +102,8 @@
                     <a href="/" class="menu-item"><i class="fas fa-home"></i>   Home</a>
                     <a href="/users" class="menu-item"><i class="fas fa-users"></i>   List of users</a>
                     <a href="/tags" class="menu-item"><i class="fas fa-hashtag"></i>   List of tags</a>
+                    {{!-- <a class="btn btn-outline-dark" href="/question" role="button">Ask a question</a> --}}
                 </nav>
-
-                <h3>Filter</h3>
-                <div class="filter">
-                    <!-- search box-->
-                    <div class="input-group mb-3">
-                        <input id="search_box" type="search" class="form-control" aria-label="Search"
-                            aria-describedby="basic-addon2" onsearch="search_filter()">
-                        <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
-                    </div>
-
-                    <!-- radio buttons-->
-                    <div style="padding: 5% 0">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sort_by" id="most_recent" value="most_recent"
-                                onclick="checked_box()">
-                            <label class="form-check-label" for="most_recent">Most Recent</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sort_by" id="most_upvoted" value="most_upvoted"
-                                onclick="checked_box()">
-                            <label class="form-check-label" for="most_upvoted">Most Upvoted</label>
-                        </div>
-                    </div>
-
-                    <!-- filter list-->
-                    <div>
-                        <h5>All filters</h5>
-                        <ul id="filter_list" class="list-group"> </ul>
-                    </div>
-                </div>
 
             </aside>
         </div>
@@ -137,28 +119,41 @@
         </script>
 
         <! –– Middle column ––>
-        <div class="col-8">
-            <div class="container mt-4">
-                <div class="jumbotron">
-                    <div class="row">
-                        <div class="col">
-                            <h1 class="display-4">{{instance.title}}</h1>
-                            <p class="lead"> Asked by: <strong>{{instance.fname}} {{instance.lname}}</strong></p>
-                        </div>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="btn btn-primary me-md-2" href="/question" role="button">Ask a question</a>
-                        </div>   
-                    </div>
-                    <hr class="my-4">
-                    <p>{{instance.body}}</p>
+        <div class="container mt-4">
+            <div class="row title-name-date">
+                <h1>{{instance.title}}</h1>
+                <div class="name-date"> Asked by <a href="/profile/{{instance.person_id}}/{{instance.fname}}{{instance.lname}}"> <strong>{{instance.fname}} {{instance.lname}}</strong> </a> on {{instance.date_and_time}}</div>
+                <div class="instance_body"> {{instance.body}} </div>
+            </div>
+            <div class="row upvote-answer">
+
+                <p>{{instance.upvote}}</p>
+                <p>{{instance.answers.length}}</p>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-primary me-md-2" href="/question" role="button">Ask a question</a>
+            </div>   
+        
+
+            <hr class="my-4">
+
+            <div class="row">
+                <div class="col-1" >
+                    <img src="/Images/clark_logo.png" style="width: 60px; height: 60px" class="profile-image img-circle">
+                </div>
+                <div class="col-11"> 
+                    <textarea type="text" name="answer_body" placeholder="Your answer"> </textarea>
                 </div>
             </div>
+
         </div>
         
+
+
+
+
         <! –– Right column ––>
-        <div class="col">
-            Column
-        </div>
+        
     </div>
 
 

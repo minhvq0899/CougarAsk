@@ -12,11 +12,11 @@ const userSchema = new mongoose.Schema({
     grad_year: Number, 
     role: String,
     major: String,
-    profile_picture: 
-    {
-        data: Buffer, 
-        contentType: String
-    },
+    // profile_picture: 
+    // {
+    //     data: Buffer, 
+    //     contentType: String
+    // },
     email: String,
     password: String
 });
@@ -80,14 +80,14 @@ const Users = mongoose.model('Users', userSchema);
 exports.register_fn = (req, res) => {
     console.log("Register body: ", req.body)
     const { first_name, last_name, role, grad_year, major, email, password, password_confirm } = req.body; 
-    console.log("first_name: ", first_name)
-    console.log(last_name)
-    console.log(role)
-    console.log(grad_year)
-    console.log(major)
-    console.log(email)
-    console.log(password)
-    console.log(password_confirm)
+    // console.log("first_name: ", first_name)
+    // console.log(last_name)
+    // console.log(role)
+    // console.log(grad_year)
+    // console.log(major)
+    // console.log(email)
+    // console.log(password)
+    // console.log(password_confirm)
 
     // Validate input
     // Missing a field

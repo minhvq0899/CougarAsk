@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--CSS-->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-digimedia-v1.css">
+    <link rel="stylesheet" href="assets/css/animated.css">
+    <link rel="stylesheet" href="assets/css/owl.css"> 
     <link rel="stylesheet" href="/style.css">
 
     <!--Bootstrap-->
@@ -14,11 +20,18 @@
     <!--Google Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!--Font Awesome library-->
     <script src="https://kit.fontawesome.com/e5b5eed843.js" crossorigin="anonymous"></script>
+
+    <!-- Scripts -->
+    <script src="assets/js/owl-carousel.js" defer></script>
+    <script src="assets/js/animation.js" defer></script>
+    <script src="assets/js/imagesloaded.js" defer></script>
+    <script src="assets/js/custom.js" defer></script>
     
-    <title>Main page</title>
+    <title>CougarAsk</title>
 
 </head>
 
@@ -27,8 +40,19 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 <body>
     <!-- Nav Bar -->
+    <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="/">CougarAsk</a>
@@ -71,80 +95,203 @@
             </div>
         </div>
     </nav>
+    </header>
 
 
-    <!-- Body -->
-    <section id="main-row-1">
+
+
+
+
+
+
+
+
+
+
+
+    <!------------------Body------------------>
+    <!-- Banner and slogan -->
+    <div id="banner_and_slogan" class="main-banner wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
         <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
             <div class="row">
-                <div class="col-lg-6 my-md-5">
+                <div class="col-lg-6 align-self-center">
+                <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+                    <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Knowledge is power</h2>
+                        <p>And sharing knowledge is the key to unlocking that power. CougarAsk is here to help the Clark community achieve that.</p>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="border-first-button scroll-to-section">
+                        <a href="https://www.clarku.edu/">Learn more about Clark University</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-6">
+                <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
                     <div class="neon-logo">CougarAsk</div>
                 </div>
-                <div class="col-lg-6 my-md-5">
-                    <p class="lead">CougarAsk is a platform for Clark students, professors, alumnae, and staffs to post questions and answers in a wide range of majors</p>
                 </div>
             </div>
+            </div>
         </div>
-    </section>
+        </div>
+    </div>
 
-    <section id="main-row-2">
+
+
+
+
+
+
+
+
+
+    <!-- Banner and slogan -->
+    <div id="about" class="about-section">
         <div class="container">
-           What Clarkies say about CougarAsk
+        <div class="row">
+            <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-left-image  wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
+                        <img src="assets/images/about-us.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 align-self-center wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                    <div class="about-right-content">
+                        <div class="section-heading">
+                            <h2>How to use CougarAsk</h2>
+                            <div class="line-dec"></div>
+                        </div>
+                        <p>CougarAsk is a platform for any Clark community member (students, professors, alumnae, staffs, etc)
+                        to post questions and answers in a wide range of majors.   
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
-    </section>
-    
-    <section id="main-row-3">
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- What Clarkies say about CougarAsk -->
+    {{!-- <div id="portfolio" class="our-portfolio section">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 my-md-5">
-                    <p>Learn more about Clark</p>
-                </div>
-                <div class="col-md-9 my-md-5">
-                    <div class="row row-cols-2">    
-                        <div class="col" align = "center">
-                            <img src="Images/clark.jpg" class="img-thumbnail" style="max-width:65%;" alt="Jonas Clark">
-                            <p class="text-center">Clark University is a private research university in Worcester, Massachusetts. Founded in 1887 
-                                                with a large endowment from its namesake Jonas Gilman Clark, a prominent businessman, Clark was one 
-                                                of the first modern research universities in the United States. Learn more about Clark <a class="text-blue text-decoration-none" href="https://www.clarku.edu/" role="button">here.</a> </p>
-                        </div>
-                        <div class="col" align = "center">
-                            <img src="Images/campus-police-banner.jpg " class="img-thumbnail" style="max-width:80%;" alt="Clark Police">
-                            <p class="text-center">If it is dark outside and you cannot book a ride, try to contact <a class="text-blue text-decoration-none" href="https://www.clarku.edu/offices/university-police/" role="button">Clark Police.</a> </p>
-                        </div>
-                </div>
-            </div>
-
-            <div class="embed-responsive embed-responsive-16by9" align = "center">
-                <iframe width="840" height="473" class="embed-responsive-item" src="https://www.youtube.com/embed/7egh9xW_2V8" allowfullscreen></iframe>
-                <p class="text-center">Learn more about the campus.</p>
-            </div>
+                <div class="col-lg-10">
+                    <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
+                        <h2>What Clarkies say about CougarAsk</h2>
+                        <div class="line-dec"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    {{!-- <div class="row2">
-        <div class="container mt-4">
-            <div class="p-3 mb-2 bg-secondary text-white text-center">If you want to know more about Clark, check out these links</div>
-            <div class="row row-cols-2">    
-                <div class="col" align = "center">
-                    <img src="Images/clark.jpg" class="img-thumbnail" style="max-width:65%;" alt="Jonas Clark">
-                    <p class="text-center">Clark University is a private research university in Worcester, Massachusetts. Founded in 1887 
-                                        with a large endowment from its namesake Jonas Gilman Clark, a prominent businessman, Clark was one 
-                                        of the first modern research universities in the United States. Learn more about Clark <a class="text-blue text-decoration-none" href="https://www.clarku.edu/" role="button">here.</a> </p>
-                </div>
-                <div class="col" align = "center">
-                    <img src="Images/campus-police-banner.jpg " class="img-thumbnail" style="max-width:80%;" alt="Clark Police">
-                    <p class="text-center">If it is dark outside and you cannot book a ride, try to contact <a class="text-blue text-decoration-none" href="https://www.clarku.edu/offices/university-police/" role="button">Clark Police.</a> </p>
-                </div>
-            </div>
 
-            <div class="embed-responsive embed-responsive-16by9" align = "center">
-                <iframe width="840" height="473" class="embed-responsive-item" src="https://www.youtube.com/embed/7egh9xW_2V8" allowfullscreen></iframe>
-                <p class="text-center">Learn more about the campus.</p>
+        <div class="container"> <!-- -fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">-->
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="loop owl-carousel">
+                    <div class="item">
+                    <a href="#">
+                        <div class="portfolio-item">
+                        <div class="thumb">
+                        <img src="assets/images/portfolio-01.jpg" alt="">
+                        </div>
+                        <div class="down-content">
+                        <h4>Website Builder</h4>
+                        <span>Marketing</span>
+                        </div>
+                    </div>
+                    </a>  
+                    </div>
+                    <div class="item">
+                    <a href="#">
+                        <div class="portfolio-item">
+                        <div class="thumb">
+                        <img src="assets/images/portfolio-01.jpg" alt="">
+                        </div>
+                        <div class="down-content">
+                        <h4>Website Builder</h4>
+                        <span>Marketing</span>
+                        </div>
+                    </div>
+                    </a>  
+                    </div>
+                    <div class="item">
+                    <a href="#">
+                        <div class="portfolio-item">
+                        <div class="thumb">
+                        <img src="assets/images/portfolio-02.jpg" alt="">
+                        </div>
+                        <div class="down-content">
+                        <h4>Website Builder</h4>
+                        <span>Marketing</span>
+                        </div>
+                    </div>
+                    </a>  
+                    </div>
+                    <div class="item">
+                    <a href="#">
+                        <div class="portfolio-item">
+                        <div class="thumb">
+                        <img src="assets/images/portfolio-03.jpg" alt="">
+                        </div>
+                        <div class="down-content">
+                        <h4>Website Builder</h4>
+                        <span>Marketing</span>
+                        </div>
+                    </div>
+                    </a>  
+                    </div>
+                    <div class="item">
+                    <a href="#">
+                        <div class="portfolio-item">
+                        <div class="thumb">
+                        <img src="assets/images/portfolio-04.jpg" alt="">
+                        </div>
+                        <div class="down-content">
+                        <h4>Website Builder</h4>
+                        <span>Marketing</span>
+                        </div>
+                    </div>
+                    </a>  
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
     </div> --}}
+    
+
+
+
+
+    {{!-- <section id="main-row-3">
+            <div class="embed-responsive embed-responsive-16by9" align = "center">
+                <iframe width="840" height="473" class="embed-responsive-item" src="https://www.youtube.com/embed/7egh9xW_2V8" allowfullscreen></iframe>
+                <p class="text-center">Learn more about the campus.</p>
+            </div>
+                </div>
+            </div>
+        </div>
+    </section> --}}
  
 </body>
 

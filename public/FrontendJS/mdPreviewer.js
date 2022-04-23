@@ -3,9 +3,9 @@ var converter = new showdown.Converter();
 
 // Constantly write html
 function update_previewer() {
-    const currentBody = $('#question_body').val().toLowerCase();
+    const currentBody = $('#question_body').val(); 
     const htmlBody = converter.makeHtml(currentBody);
-    // console.log(htmlBody);
+    console.log(htmlBody);
     $('#md_previewer').html(htmlBody);  
 }
 
