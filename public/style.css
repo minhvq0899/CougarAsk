@@ -450,8 +450,13 @@ p.form_title {
     text-decoration: none; 
 }
 
+#submitResponse textarea {
+    background-color: #e1d5f1;
+}
 
-
+#submitResponse button {
+    margin-right: 0;
+}
 
 
 

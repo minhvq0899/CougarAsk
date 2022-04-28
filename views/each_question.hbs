@@ -22,7 +22,7 @@
     <script src="https://kit.fontawesome.com/e5b5eed843.js" crossorigin="anonymous"></script>
     
     <!--JS-->
-    <script src="/FrontendJS/filter.js" defer></script>
+    {{!-- <script src="/FrontendJS/filter.js" defer></script> --}}
     <script src="/FrontendJS/each_question.js" defer></script>
 
     <style>
@@ -126,7 +126,6 @@
                 <div class="instance_body"> {{instance.body}} </div>
             </div>
             <div class="row upvote-answer">
-
                 <p>{{instance.upvote}}</p>
                 <p>{{instance.answers.length}}</p>
             </div>
@@ -137,12 +136,24 @@
 
             <hr class="my-4">
 
-            <div class="row">
+            <div class="row response">
                 <div class="col-1" >
                     <img src="/Images/clark_logo.png" style="width: 60px; height: 60px" class="profile-image img-circle">
                 </div>
                 <div class="col-11"> 
-                    <textarea type="text" name="answer_body" placeholder="Your answer"> </textarea>
+                    <form class="mb-5" id="submitResponse" action="/question/submitResponse/id={{_id}}" method="POST">
+                        <div class="col-md-12 form-group">
+                            <textarea class="form-control" name="response" rows="3" placeholder="Write your answer"></textarea>
+                        </div>
+                        
+                        <button type="submit" onclick="submitResponseFn()" class="btn btn-primary justify-content-md-end">Submit</button>                        
+                    </form>
+
+                    <script>
+                        function submitResponseFn() {
+                            document.getElementById("submitResponse").submit();
+                        }
+                    </script>   
                 </div>
             </div>
 

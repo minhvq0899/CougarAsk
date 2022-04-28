@@ -22,17 +22,18 @@ const Questions = mongoose.model('Questions', questionSchema);
 
 
 
-// const answerSchema = new mongoose.Schema({
-//     fname: String, 
-//     lname: String,
-//     body: String, 
-//     responses: Array,
-//     date_and_time: { type: String, default: new Date().toString() } , 
-//     upvote: { type: Number, default: 0 },
-// }) 
+const answerSchema = new mongoose.Schema({
+    person_id: String,
+    fname: String, 
+    lname: String,
+    body: String, 
+    responses: Array,
+    date_and_time: { type: String, default: new Date().toString() } , 
+    upvote: { type: Number, default: 0 }
+}) 
 
-// // Compile these schema into a model --> a class
-// const Answers = mongoose.model('Answers', answerSchema);
+// Compile these schema into a model --> a class
+const Answers = mongoose.model('Answers', answerSchema);
 
 
 /* Content:
@@ -45,7 +46,7 @@ const Questions = mongoose.model('Questions', questionSchema);
 
 
 
-// ************************************************************** Questions **************************************************************
+// ********************************* Questions *********************************
 exports.ask_fn = (req, res) => {
     // console.log( "req.body: ", req.body);
     const { title, major, question_body, tag } = req.body; 
@@ -310,3 +311,74 @@ exports.questionInfo = async (req, res, next) => {
         return next();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ********************************* Answers *********************************
+exports.answer_fn = (req, res) => {
+    // console.log( "req.body: ", req.body);
+    const { response } = req.body; 
+
+    // Validate input
+    // Missing a field
+    if (response == "" ) {
+        req.session.message_fail = "Missing one or more fields"; 
+        return res.redirect('/question'); 
+    } 
+
+    async function insertAnswer() {
+        const answer = new Answers({
+            person_id: req.user.id,
+            fname: req.user.fname,
+            lname: req.user.lname,
+            body: response
+        })
+
+        console.log( "question: ", question);
+
+        const result = await question.save(); 
+        
+        if (result) {
+            req.session.message_success = "Successful!"; 
+            console.log("User " + req.user.email + " just posted a question"); 
+            return res.redirect('/question'); 
+        } else {
+            req.session.message_fail = "Unsuccessful! Please try again!"; 
+            return res.redirect('/question'); 
+        }
+    }
+
+    insertQuestion();
+}
+
+
+
+
+
+
+
+
+
+
+
