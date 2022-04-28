@@ -142,21 +142,21 @@
                 </div>
                 <div class="col-11"> 
                     <form class="mb-5" id="submitResponse" action="/question/submitResponse/id={{_id}}" method="POST">
-                        <div class="col-md-12 form-group">
+                        <div class="col-12 form-group">
                             <textarea class="form-control" name="response" rows="3" placeholder="Write your answer"></textarea>
                         </div>
-                        
-                        <button type="submit" onclick="submitResponseFn()" class="btn btn-primary justify-content-md-end">Submit</button>                        
-                    </form>
-
-                    <script>
-                        function submitResponseFn() {
-                            document.getElementById("submitResponse").submit();
-                        }
-                    </script>   
-                </div>
+                        <div class="row button-response">
+                            <button type="submit" onclick="submitResponseFn()" class="btn btn-primary">Submit</button>                        
+                        </div>          
+                    </form>     
+                </div>  
             </div>
-
+            
+            <script>
+                function submitResponseFn() {
+                    document.getElementById("submitResponse").submit();
+                }
+            </script>   
         </div>
         
 

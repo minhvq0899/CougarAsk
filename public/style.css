@@ -229,6 +229,27 @@ p.form_title {
 }
 
 
+#submitResponse .button-response {
+    display:flex;
+    justify-content: flex-end;
+}
+
+#submitResponse button {
+    margin: 10px 0 0 10px;
+    /* margin-top: 10px;
+    margin-right: 20px; */
+    width: 80px; 
+}
+
+
+
+
+
+
+
+
+
+
 /* -------------------- Side Nav Bar -------------------- */
 .css-grid .col1 {
     display: flex;
